@@ -89,7 +89,7 @@ public class MainFrame extends JFrame {
 	private int mRawImageWidth = DEFAULT_WIDTH;
 	private int mRawImageHeight = DEFAULT_HEIGHT;
 	private boolean mPortrait = true;
-	private double mZoom = 1.0;
+	private double mZoom = 0.3;
 	private int mFbType = FB_TYPE_XBGR;
 
 	private ADB mADB;
@@ -299,7 +299,7 @@ public class MainFrame extends JFrame {
 			int prefVer = mPrefs.getInt("PrefVer", 1);
 			if (prefVer == 1) {
 				mPortrait = mPrefs.getBoolean("Portrait", true);
-				mZoom = mPrefs.getDouble("Zoom", 1.0);
+				mZoom = mPrefs.getDouble("Zoom", 0.3);
 				mFbType = mPrefs.getInt("FbType", FB_TYPE_XBGR);
 			}
 		}
