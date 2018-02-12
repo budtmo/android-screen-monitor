@@ -119,26 +119,13 @@ public class MainFrame extends JFrame {
 
 		mDevices = mADB.getDevices();
 		if (mDevices != null) {
-			ArrayList<String> list = new ArrayList<String>();
-			for (int i = 0; i < mDevices.length; i++) {
-				list.add(mDevices[i].toString());
-			}
-			SelectDeviceDialog dialog = new SelectDeviceDialog(this, true, list);
-			dialog.setLocationRelativeTo(this);
-			dialog.setVisible(true);
-			if (dialog.isOK()) {
-				int selectedIndex = dialog.getSelectedIndex();
-				if (selectedIndex >= 0) {
-					mDevice = mDevices[selectedIndex];
-					setImage(null);
-				}
-			}
+			// Mirror the first device
+			mDevice = mDevices[0];
+			setImage(null);
+			mChimpDevice = new AdbChimpDevice(mDevice);
+			mBuildDevice = mChimpDevice.getProperty("build.device");
+			startMonitor();
 		}
-
-		mChimpDevice = new AdbChimpDevice(mDevice);
-		mBuildDevice = mChimpDevice.getProperty("build.device");
-
-		startMonitor();
 	}
 
 	public void setOrientation(boolean portrait) {
